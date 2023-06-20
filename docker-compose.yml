@@ -1,0 +1,36 @@
+version: "3"
+services:
+  api-spring:
+    image: alejo123qwe34/api-spring:latest
+    networks:
+      - net-cloud
+    container_name: api-spring
+    depends_on:
+      - mysql_container
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql_container/usuarios_bd?allowPublicKeyRetrieval=true
+      - SPRING_DATASOURCE_USERNAME=mysqluser
+      - SPRING_DATASOURCE_PASSWORD=secret
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+      - SPRING_JPA_SHOW_SQL=true
+      - SPRING_DATASOURCE.CACHEPREPSTMTS=false
+    ports:
+      - 8082:8080
+
+  mysql_container:
+    image: mysql:8
+    networks:
+      - net-cloud
+    container_name: mysql_container
+    ports:
+      - 3307:3306
+    environment:
+      - MYSQL_ROOT_PASSWORD=secret
+      - MYSQL_DATABASE=usuarios_bd
+      - MYSQL_USER=mysqluser
+      - MYSQL_PASSWORD=secret
+    command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+    
+networks:
+  net-cloud:
+    

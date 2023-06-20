@@ -1,0 +1,25 @@
+cloud:
+  aws:
+    credentials:
+      access-key: AKIARVYB6IPUTOY4E7MA
+      secret-key: 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
+    region:
+      static: us-east-1
+    stack:
+      auto: false
+
+application:
+  bucket:
+    name: springboots3bucketm5a
+
+
+spring:
+  servlet:
+    multipart:
+      enabled: true
+      file-size-threshold: 2MB
+      max-file-size: 20MB
+      max-request-size: 50MB
+
+server:
+  port: 9090
